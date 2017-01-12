@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tables</title>
+</head>
+<body>
+ KeyInput
+  <br>
+  <table><tr><td> 
+   <table summary="">
+    <tr>
+       <td>Routine name|</td><td>In|</td><td>Out|</td><td>Exceptions</td>
+       <tr>
+       <td>try2Shoot</td><td>-</td><td>-</td><td>-</td>
+       </tr>
+       <td>KeyInput</td><td>Handler</td><td>-</td><td>-</td>
+       </tr>
+       <tr>
+       <td>keyPressed</td><td>KeyEvent</td><td>-</td><td>-</td>
+       </tr>
+       <tr>
+       <td>keyReleased</td><td>KeyEvent</td><td>-</td><td>-</td>
+       </tr>
+    </tr>
+  </table>
+  <br>
+  Assumptions: No Assumptions <br><br>
+  
+  State Variables: 
+  <br>
+  handler: Handler <br>
+  Creates object to reference Handler class<br>
+  keyDown: boolean[]<br>
+  To allow smoother clicks of keys, boolean array is used because true false logic makes this easier. <br>
+  dx:statc float<br>
+  change in x-direction used to calculate when bullet is shot and movement of ship<br>
+  dy:static float<br>
+  change in y-direction used to calculate where pong paddle will be<br>
+  lastShot: long<br>
+  used in coherence with system time to calculate after which time can next bullet be shot <br>
+  displacement: static int<br>
+  Used to find center of specfic game objects<br>
+  key: int<br>
+  used to convert kevevent data in terms of integers<br>
+  tempObject: GameObject<br>
+  temporary object of GameObject used to find specfic spots in linked list<br>
+  e: KeyEvent<br>
+  wait: long<br>
+  amount of time to wait in milliseconds for next shot in ship<br>
+  addObject: handler<br>
+  adds objects of type GameObject inside of linked list<br><br>
+  
+  Environment  Variables: <br>
+  Keyboard: Input Device<br><br>
+  
+  Access Routine Semantics:<br><br> 
+  try2Shoot(handler):<br>
+  transition: Spawns bullet into ship which then go up and hit aliens. Uses System time to limit how many bullets can be shot back to back.<br>
+  keyInput(handler):<br>
+  transition: Initializes handler and keyDown array<br>
+  keyPressed(e):<br>
+  transition: When  key 'a' pressed player goes left. When key 'd' pressed player goes right. When key 'w' is pressed pong paddle goes up.When key 's' is pressed pong paddle goes down. <br>
+  keyReleased(e):<br>
+  transition: When  key 'a' released, respective keyDown boolean value set to false. When  key 'd' released sets respective keyDown boolean value to false. <br>
+  When  key 'w' released sets respective keyDown boolean value to false. When  key 's' released sets respective keyDown boolean value to false.<br>
+  
+</html>

@@ -1,0 +1,1 @@
+The interface for the modules was documented using Doxygen.

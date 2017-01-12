@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tables</title>
+</head>
+<body>
+  Menu
+   <br>
+   <table><tr><td> 
+    <table summary="">
+     <tr>
+        <td>Routine name|</td><td>In</td><td>|Out|</td><td>Exceptions</td>
+        <tr>
+        <td>Menu</td><td>Game,Handler</td><td></td><td></td>
+        </tr>
+        <tr>
+        <td>MousePressed</td><td>MouseEvent</td><td>-</td><td></td>
+        </tr>
+        <tr>
+        <td>mouseOver</td><td>int,int,int,int,int,int</td><td>boolean</td><td></td>
+        </tr>
+        <tr>
+        <td>makeOption</td><td>int,Color,String,int,int,int,Graphics</td><td></td><td></td>
+        </tr>
+        <tr>
+        <td>makeOption</td><td>int,Color,String,int,int,Graphics</td><td></td><td></td>
+        </tr>
+        <tr>
+        <td>render</td><td>Graphics</td><td>-</td><td></td>
+        </tr>
+        <tr>
+     </tr>
+   </table>
+   <br>
+   Assumptions: No Assumptions <br><br>
+   
+  
+  State Variables:
+   <br>
+  handler:Handler<br><br>
+  reference to Handler class<br><br>
+   game:Game<br><br>
+  reference to Game class<br><br>
+  ref : String<br><br>
+  no paddle sprite; however needs to be referenced as Pong is a child of Game Object <br><br>
+  e:MouseEvent<br><br>
+  mouse action component<br><br>
+  mx: int<br><br>
+  gives x-position of mouse location<br><br>
+  my: int<br><br>
+  gives y-position of mouse location<br><br>
+  STATE: enum<br><br>
+  all states of game<br><br>
+   add:LinkedList<br><br>
+   add GameObject to linked list<br><br>
+   remove: LinkedList<br><br>
+   removes GameObject from linked list<br><br>
+   ID: enumeration<br><br>
+   Is the identification of which class is being referred to<br><br>
+   HEIGHT:Game<br><br>
+   Give height of game window<br><br>
+   WIDTH:Game<br><br>
+   Give width of game window<br><br>
+   x: int<br><br>
+   Is the x-position of menu box<br><br>
+   y: int<br><br>
+   Is the y-position of the menu box<br><br>
+   height: int<br><br>
+   Is the height of menu box<br><br>
+   width: int<br><br>
+   Is the width of the menu box<br><br>
+   fnt: Font<br><br>
+   Type of font wanted to write for in menu<br><br>
+   fntSize: int<br><br>
+   Size of font wanted to write for in menu<br><br>
+   Color: AWT<br><br>
+   Sets a color of the menu option<br><br>
+   drawRect : Graphics<br><br>
+   Creates a box which will be menu options<br><br>
+   option:String<br><br>
+   the text to write in menu option<br><br>
+   posX: int<br><br>
+   Is the x-position of string to be placed in menu<br><br>
+   posY: int<br><br>
+   Is the y-position of string to be placed in menu<br><br>
+   dHeight: int<br><br>
+   change in height with regards to change in resolution of the game window<br><br>
+   g: Graphics<br><br>
+   allows graphics to be drawn on to screen<br><br>
+   title:String<br><br>
+   title of menu option box <br><br>
+   menuBoxHeight:int<br><br>
+   height of menu box<br><br>
+   menuBoxX:int<br><br>
+   x position of menu box<br><br>
+   menuBoxY:int<br><br>
+   y postion of menu box<br><br>
+   menuBoxWidth:int<br><br>
+   width of menu box<br>
+  <br>
+   
+   Environment  Variables: <br>
+   Screen: Display Device<br><br>
+   
+   Access Routine Semantics: <br>
+   Menu():<br>
+   transition: Initializes reference to Game and this instance of handler  <br>
+   mousePressed():<br>
+   transition: checks if parts of menu clicked <br>
+   mouseOver():<br>
+   transition: checks if mouse is currently hovering over menu options, returns boolean value<br>
+   makeOption():<br>
+   transition: creates box where menu option is drawn<br>
+   makeTitle():<br>
+   transition: creates the title displayed on menu option box<br>
+   render():<br>
+   transition: renders menu <br>
+</html>

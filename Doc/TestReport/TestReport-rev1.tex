@@ -1,0 +1,193 @@
+\documentclass[12pt, oneside]{article}   	
+\usepackage{geometry}                		
+\geometry{letterpaper}                   		
+\usepackage{graphicx}				
+\usepackage{amssymb, amsmath}
+\usepackage{cite}
+
+
+
+\title{SE 3XA3: Development Plan\\Pong Invaders}
+\author{Team \#10, Ben Ten
+		\\ Puru Jetly	\texttt{jetlyp}
+		\\ Karnvir Bining	\texttt{biningk}
+		\\ Rehan Theiveehathasan	\texttt{theivers}
+}
+\date{}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+
+\section{Revision History}
+
+\begin{table}[h]
+\centering
+\caption{Document Revision History}
+\label{revhist}
+\begin{tabular}{| l | l | l | l |}
+\hline
+\multicolumn{1}{|c|}{Date} & \multicolumn{1}{c|}{Revision} & \multicolumn{1}{c|}{Author}  \\
+\hline
+December 8th, 2016 & 1 & Puru Jetly \\
+\hline
+December 8th, 2016 & 1 & Karnvir Bining \\
+\hline
+December 8th, 2016 & 1 & Rehan Theiveehathasan \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{General Information}
+\subsection{Summary}
+The Pong Invaders project was designed to be a twist on two classic arcade games. Ben 10 as group merged together Pong and Space Invaders to create Pong Invaders; which has the user playing both of the iconic games at the same time. The game ends when the user either destroys all the aliens and defeats the AI paddle,  leading to a victory. Or if the user loses to the AI or the aliens make a landing the user loses. Pong Invaders was tested using the following methods: functional testing, unit testing, system tests, error catching and manual testing. Many of the problems were found with functional tests throughout the the project and were fixed along the way. Pong Invaders came out to be a strong representation of what we at Ben 10 set out to accomplish and the test report reflects that. 
+
+\subsection{Definitions, Acronyms, Abbreviations, Symbols}
+Please refer to Table \ref{symbtable} for the list of symbols, abbreviations and any 
+terms that need defining that are used throughout the remainder of the document. 
+
+\begin{table}[h]
+\caption{List of Symbols, Acronyms and Abbreviations}
+\label{symbtable}
+\begin{tabular}{p{0.2\linewidth} || p{0.8\linewidth}}
+\hline
+\textbf{Symbol} & \textbf{Description} \\
+\hline
+Pong Invaders &  The project's name \\
+Ben 10 & The group working on and developing the project\\
+Functional Test & An input/output blackbox type test \\
+Structural Test & A code-based whitebox type test \\
+Unit Test & A small series of tests for functions and methods: done with Junit \\
+Dynamic Test & Requires code/program to be executed \\
+Static Test & Code inspection: no execution \\
+Manual Test & Hand-written test cases \\
+System Test & Blackbox Tests testing the finished product as a whole \\
+Stress Test & Testing the limits \\
+\hline
+\end{tabular}
+\end{table}
+
+\clearpage
+
+\subsection{Environment}
+Pong Invaders was made to be used on any programming environment given that it has access to the java JVM.   
+\subsection{References}
+Pong Invaders was based off of an open source project: spaceinvaders-101-java by Marc Liberatore. The license allows us to use and modify the  spaceinvaders-101-java so long as the original authors and contributors are mentioned. 
+
+
+\section{Analysis Summary}
+
+\subsection{Capabilities}
+Pong Invaders again, is capabable of running on mac, linux or pc as long as it has access to the java JVM. The user simply needs to run the executable jar file and begin playing to their leisure. 
+
+\subsection{Deficiencies}
+Unfortunately due to time constraints, Ben 10 was unable to provide the full experience we set out to accomplish. Pong Invaders only includes the destroy all enemies play mode and does not implement a scoring system with a "horde mode" that was also originally outlined. Furthermore, music and enemy collision visuals were kept in the waiting room and pushed back until they are able to be implemented. 
+
+\subsection{Risks}
+Pong Invaders holds some risks in its scalability as it runs using a linked list. This may prove to be a problem when implementing a "horde mode" in the future implementation of the game. Also, the game is kept at a resolution of 1280x720 so this may prove to be a problem based on user screen size.
+
+\subsection{Recommendations and Estimates}
+Increasing game functionality and aestetics can be a tall task. Adding a second game mode can take upwards of 4-5 hours as changes may need to be made to the core of the game. Adding additional visual effects such as; enemy object explosions, 
+music, and menu visuals, is not as intensive. These changes are estimated close to 2-3 hours of time and can be added in the near
+future. 
+
+\subsection{Option}
+Pong Invaders currently requires some fine tuning to its aestetic appeal but from a functional stand point the project is a succes. 
+With some additions and a couple more hours of work put into it, Pong Invaders will hopefully be ready for the market.
+
+\section{Testing}
+
+\subsection{Black Box/Functional Testing, Table 3}
+
+\subsubsection{File Input}
+
+\subsubsection{System}
+This subsection is a summary of tests regarding the system as a whole using a blackbox (functional) approach.  The Test Cases refer to the number (by section/subsection) in the Test Plan.
+
+\begin{table}[ht]
+\label{fin}
+\caption{File Input}
+\begin{tabular}{|p{0.2\textwidth} || p{0.2\textwidth} || p{0.5\textwidth} || p{0.1\textwidth}|}
+\hline
+Initial State: & Start.  &  Jar is executed  & \\
+Test Types: & & System, functional, Dynamic & \\
+Test Factors & & Correctness, Compatibility & \\
+\hline
+\hline
+\textbf{Test Case \#} & \textbf{Input} & \textbf{Expected Result} & \textbf{Result} \\
+\hline
+3.1.1.1 & mouse coordinates & Successfully found mouse coordinates, pass \\
+3.1.1.2 & key input & Correctly recognized user input keys, pass \\
+3.1.1.3 & mouse inputs & Successfully traversed the game menu, pass \\
+\hline
+3.1.2.2 & Key input & Successfully destroyed enemy, pass \\
+3.1.2.3 & key and mouse input & Successfully ended game with esc key and exit button from menu, pass\\
+3.1.2.4 & N/A & Game successfully lost, pass\\
+3.1.2.6 & N/A & Correct sprites successfully loaded in, pass\\
+\hline
+3.2.1.1 & key inputs & inputs were successfully printed, pass\\
+\hline
+3.2.2.1 & N/A & no illegal material, pass\\
+3.2.2.2 & N/A & Game was downloaded to non-developer pc and it worked, pass\\
+\hline 
+\end{tabular} 
+\end{table}
+
+
+\subsection{White Box (Structural) Testing, Table 4}
+\subsubsection{Front-End: Game Display}
+
+
+\begin{table}[ht]
+\label{gui}
+\caption{Visualization of AST}
+\begin{tabular}{|p{0.2\textwidth} || p{0.5\textwidth}| || p{0.1\textwidth}|}
+\hline
+Intial state:  & Game Active State & \\
+Input:  & Key inputs and mouse inputs & \\
+\hline
+\hline
+\textbf{Test case} & \textbf{Expected result} & \textbf{Result}\\
+\hline
+Ship Movement & Horizontal movement with A, D input respectively & Passed \\
+\hline
+Hitbox of Alien & Alien box rendered correctly & Passed \\
+\hline
+Hitbox of Ship and End game & Game ends when hitbox reached & Passed \\
+\hline 
+Hitbox of paddle & Ball returned correctly & Passed \\
+\hline
+Hitbox of alien & Does not pass paddle & Passed \\
+\hline
+
+\end{tabular}
+\end{table}
+
+\subsubsection{Junit Testing, Table 5}
+Unit testing done using Junit to test method outputs.
+
+\begin{table}[ht]
+\label{stack}
+\caption{Parse \& Lexer Structural Tests}
+\begin{tabular}{|p{0.2\textwidth} || p{0.2\textwidth} || p{0.5\textwidth} || p{0.1\textwidth}|}
+\hline
+Initial State: & N/A & Active Game State & \\
+Test Types: & & Unit, automated & \\
+Test Factors & & Correctness & \\
+\hline
+\hline
+\textbf{Test Case \#} & \textbf{Input} & \textbf{Expected Result} & \textbf{Result} \\
+\hline
+3.1.2.5 & key inputs & No output when keys pressed & pass\\
+3.1.2.1 & Mouse movement & True when point is passed by mouse & pass\\
+\hline
+\end{tabular}
+\end{table}
+\end{document}  

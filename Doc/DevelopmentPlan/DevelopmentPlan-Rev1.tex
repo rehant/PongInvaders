@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\title{SE 3XA3: Development Plan\\Pong Invaders}
+\author{Team \#10, Ben Ten
+		\\ Rehan Theiveehathasan	\texttt{theivers}
+		\\ Karnvir Bining	\texttt{biningk}
+		\\ Puru Jetly	\texttt{jetlyp}
+}
+\date{}
+\begin{document}
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+\midrule
+September 29, 2016 & Puru Jetly & Intial changes\\
+September 29, 2016 & Karnvir Bining & Intial changes\\
+September 29, 2016 & Rehan Theiveehathasan & Intial changes\\
+\midrule
+December 8th, 2016 & Puru Jetly & Final revision\\
+December 8th, 2016 & Karnvir Bining & Final revision\\
+December 8th, 2016 & Rehan Theiveehathasan & Final revision\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\newpage
+\maketitle
+
+\section{Team Meeting Plan}
+
+When: 8 - 10:30 PM \newline
+\newline
+Where: On skype or at Thode\newline
+\newline
+Frequency: On Wednesday and Saturday\newline
+
+
+\noindent Experts: \newline
+\indent Documentation: Karnvir Bining\newline
+\indent Git: Rehan Theiveehathasan\newline
+\indent LaTeX: Puru Jetly\newline
+\indent Technology: \newline
+\indent  \indent Java: All members \newline
+
+\noindent Rules for Agenda:\newline
+
+\noindent There will be a chair for each meeting. The person who is chair for the meeting will alternate on a week by week basis. The order for chair will be Karnvir, Puru, Rehan. Since there will be two meetings in a week, the first meeting will be open discussion, and the second one will be structured to address and finalize the issues from open discussion.In open disscusion, the group will discuss what deliverables are due by next meeting  and how many resources should be dedicated to each task. In the second meeting, the deliverables will be handed in, and if a deliverable was not complete more resources will be used to complete the deliverable before submission day.
+
+\section{Team Communication Plan}
+Majority of team communication will be done through facebook, and over text messaging. For certain git related problems we will communicate through %% you have a typo here: the ’ character is NOT the ' character, and LaTeX doesn't render the ’ correctly
+git's issue tracking and through well commented commits. This will allow for the team to stay on the same page even when communication between members is not direct. If a team member is unreachable for some reason an alternate contact will also be provided. In most cases this contact is a roommate, whom we can contact to resolve the issue. \newline \newline
+\begin{table}[h!]
+  \caption{Team Communication Table}
+  \label{tab:table1}
+  \begin{tabular}{|l|c | c |r|}
+    \hline
+    \textbf{Name} & \textbf{Phone} & \textbf{Alt. Contact Name} & \textbf{Alt. Contact Phone}\\
+    \hline
+    Puru J. & 647 - 772 - 5409 & Sebastian T. & \multicolumn{1}{c|}{ 647 - 378 - 7162 }\\
+    \hline
+    Rehan T. & 647 - 993 - 8561 & David H. & \multicolumn{1}{c|}{ 519 - 546 - 6165}\\
+    \hline
+    Karnvir B. & 647 - 717 - 6969 & Ramanan R. & \multicolumn{1}{c|}{ 647 - 631 - 8566}\\
+    \hline
+  \end{tabular}
+\end{table}
+\section{Team Member Roles}
+Team Leader: Puru Jetly\newline
+Scribes: Karnvir Bining , Rehan Theiveehathasan
+
+\noindent * Scribes will alternate meeting by meeting\newline
+\section{Git Workflow Plan}
+\indent The centralized Git workflow will be used for developing Pong Invaders. This will allow all three developers for the game to be able to consistently update, and build the project while maintaining a modular design. Labels will be implemented through git tags, and are to be used to see when milestone commits are made. Milestones will be used to mark when new functionality, or significant updates are implemented. In tandem with labels, and milestones, issue tracking will be used to open issues for modules to be completed, to be debugged, and to keep track of what milestones need to be implemented still according to the Gantt chart.\newline
+\section{Proof of Concept Demonstration Plan}
+
+\indent Implementing the Pong Invaders into MVC architecture is not difficult, as all group members are familiar with this architecture. However after the implementation of Space Invaders, overlaying Pong may pose a difficulty.Such as having modules interfering with each other, and not having ample time to implement the new Pong modules. The main risk of the project will be whether or not our group can successfully blend the Pong objects into Space Invaders without either breaking our implementation or attempting an overly time consuming method of implementation. The way this difficulty can be overcome is by modularizing the Space Invaders program, and by keeping ahead of schedule for the implementation of Space Invaders. Proof of our efforts will be displayed by ensuring that a functional Space Invaders can be demo-ed showing that the group has kept ahead of schedule. Along with, a well documented module guide to show the modularity of Space Invaders. 
+
+\section{Technology}
+\indent The programming language of choice for this project will be Java with Eclipse being the IDE of choice. Java was chosen specifically as the source code was also compiled in Java. Java code can also be run on any machine that currently has Java installed. Furthermore Junit is a powerful tool for testing and will thus be implemented within the Space Invaders project. Git will be used for versioning to keep track of the Pong Invader source code while it is being developed. Makefiles will also be used, they will be used to compile the source code, thus a bash terminal is necessary. Finally, all documentation for this project will be generated through Latex as it versalite and well structured allowing for easy to read professional standard documentation.
+\section{Coding Style}
+%% same apostrophe problem here.
+\indent Pong Invaders' coding style will follow standard Java naming conventions, as seen here: http://www.oracle.com/technetwork/java/codeconventions-135099.html. Pong Invaders will also use tabs instead of spaces, and have comments for every block of code or method. This coding style is easy to read, and very easy to follow.
+\section{Project Schedule}
+\url {https://gitlab.cas.mcmaster.ca/biningk/Space_Invaders_10/blob/master/Doc/DevelopmentPlan/Pong_Invaders_Project_Schedule.pdf}
+%\section{Project Review}
+\section{Project Review}
+\indent Pong Invaders will be implemented in the next 4 months to be a new twist on two classic arcade games, Space Invaders and Pong. Ben 10 will put its best foot forward to ensure all parts of the project are implemented in an efficient and timely manner as outlined in our gantt chart. 
+\newpage
+
+\end{document}

@@ -1,0 +1,247 @@
+\documentclass[12pt, titlepage]{article}
+\usepackage{fullpage}
+\usepackage[round]{natbib}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+\newcounter{acnum}
+\newcommand{\actheacnum}{AC\theacnum}
+\newcommand{\acref}[1]{AC\ref{#1}}
+\newcounter{ucnum}
+\newcommand{\uctheucnum}{UC\theucnum}
+\newcommand{\uref}[1]{UC\ref{#1}}
+\newcounter{mnum}
+\newcommand{\mthemnum}{M\themnum}
+\newcommand{\mref}[1]{M\ref{#1}}
+\title{SE 3XA3: Design Document\\Pong Invader}
+\author{Team \#10, Ben 10
+		\\ Rehan Theiveehathasan \texttt{theivers}
+		\\ Karnvir Bining                  \texttt{biningk}
+		\\ Puru Jetly                        \texttt{jetlyp}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+November 13, 2016 & 1.0 & Initial changes\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+\newpage
+\pagenumbering{arabic}
+\section{Introduction}
+This is the Design Documentation (DD-Rev1) % put a space before the open bracket
+for Ben 10’s project Pong Invaders. This document outlines the design specifications as outlined by Dr. Spencer Smith.
+Complimentary documentation includes a Module Interface Specifications (MIS) % again, a space
+document written with Javadoc.
+\color{red}
+The motivation behind this document is to allow for the decomposition of systems that plan to scale into the future with updates, which allow for developers to concurrently develop components without risk of components not working with each other. The Pong Invader's project is concerned with creating a modular system design for the game that is well documented to allow for future upgrades to improve on current game mechanics. Currently the Pong Invader's system design principle is that of Model-View-Controller (MVC software design pattern) which is believed to be the best fit for allowing Pong Invader's to be modular.
+\color{black}
+Potential readers of this document include:
+\begin{itemize}
+\item Designers/Developers: This document is a way to communicate how the program being designed should function in terms of coupling and meeting requirements. It allows developers to stay on the same page and be consistent with design assumptions. The breakdown of module interaction and traceability to requirements allows future developers to easily distinguish areas that can be optimized or changed. 
+\item New Members: This documentation is an effective way to portray the project focus and aim to new members who need to be brought up to speed.
+\end{itemize}
+
+
+
+\section{Anticipated and Unlikely Changes} \label{SecChange}
+This section outlines changes that may occur in the project. Anticipated changes are outlined in section 2.1 and unlikely changes in section 2.2.
+
+\subsection{Anticipated Changes} \label{SecAchange}
+ The following changes were identified throughout the course of project. These changes take minimal adjustment to project structure and design making them easy to implement within the given timeline constraints. 
+
+\begin{description}
+\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The hardware on which the software is running. 
+\item[\refstepcounter{acnum} \actheacnum \label{acInput}:]  The format of the final output or display mechanism.
+\item[\refstepcounter{acnum} \actheacnum \label{acParams}:] Changing win condition. 
+\item[\refstepcounter{acnum} \actheacnum \label{acVerify}:] Additional Functionality from game menu. 
+\item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] The operating system the game will run with. 
+\end{description}
+\subsection{Unlikely Changes} \label{SecUchange}
+The following changes were identified as requiring large adjustments to the project code and potentially requiring changes to several other components to be correctly implemented.
+
+\begin{description}
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices (Input: keyboard and mouse, Output: Screen)
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucInput}:] The Collision physics
+\end{description}
+\section{Module Hierarchy} \label{SecMH}
+
+\begin{description}
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
+\item [\refstepcounter{mnum} \mthemnum :]  Input Format Module
+\item [\refstepcounter{mnum} \mthemnum :] Output Module
+\item [\refstepcounter{mnum} \mthemnum :] Controller Module
+\item [\refstepcounter{mnum} \mthemnum :] Physics Module 
+\end{description}
+\begin{table}[h!]
+\centering
+\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
+\toprule
+\textbf{Level 1} & \textbf{Level 2}\\
+\midrule
+{Hardware-Hiding Module} & ~ \\
+\midrule
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ~\\
+& Input Format Module\\
+& Output Module\\
+& Controller Module\\
+\midrule
+\multirow{3}{0.3\textwidth}{Software Decision Module} & {~}\\
+& Physics Module\\
+\bottomrule
+\end{tabular}
+\caption{Module Hierarchy}
+\label{TblMH}
+\end{table}
+\section{Connection Between Requirements and Design} \label{SecConnection}
+The design of the system is intended to satisfy the requirements developed in
+the SRS. In this stage, the system is decomposed into modules. The connection
+between requirements and modules is listed in Table \ref{TblRT}.
+
+\section{Module Decomposition} \label{SecMD}
+Module decomposition is the process of creating a set of submodules that adhere to the principle of  "information hiding." This principle of information hiding will be used as a fundamental concept for Pong Invader's object oriented development. Even though Pong Invader's is a stand-alone project without any foreseeable scalability, it will still be extremely beneficial to achieve modular design through module decomposition as Pong Invader's is created in phases.
+
+\subsection{M1: Hardware Hiding Modules (Pointing Devices, Keyboard, and Displays}
+\begin{description}
+\item[Secrets:] Data structures and algorithms that are implemented by device drivers, and hardware.
+\item[Services:] Allows the system to access and handle input/output from the hardware and software.
+\item[Implemented By:] The Java Virtual Machine, and the respective users' operating system.
+\end{description}
+
+\subsection{M2: Input}
+\begin{description}
+\item[Secrets:] Data structures and data type of inputs.
+\item[Services:] This module handles user keyboard input data, and then sends the input data to the correct modules to allow for event processing.
+\item[Implemented By:] KeyInput
+\end{description}
+
+\subsection{M3: Output}
+\begin{description}
+\item[Secrets:] Data structures of what is displayed to the screen.
+\item[Services:] This module handles outputting the game state produced by all the following sub modules. The submodules are all subject to change if there are changes to the software requirements specifications.
+\item[Implemented By:] GameObject, Bullet, Alien, Player
+\end{description}
+
+\subsubsection{M4: GameObject}
+\begin{description}
+\item[Secrets:] Data structure concerning game states, arrays and symbolic parameters for position, and velocity.
+\item[Services:] Handles game state, and delegates what to be displayed and when.
+\end{description}
+
+\subsubsection{M5: Alien}
+\begin{description}
+\item[Secrets:] Data structure of alien object.
+\item[Services] Sends alien data of velocity, position, and description of what to rasterize to GameObject.
+\end{description}
+
+\subsubsection{M6: Bullet}
+\begin{description}
+\item[Secrets:] Data structure of bullet object.
+\item[Services:] Sends bullet data of velocity, position, and description of what to rasterize to GameObject.
+\end{description}
+
+\subsubsection{M7: Player}
+\begin{description}
+\item[Secrets:] Data structure of player object.
+\item[Services:] Sends player data of velocity, position, and description of what to rasterize to GameObject.
+\end{description}
+
+\subsection{M8: Controller}
+\begin{description}
+\item[Secrets:] Data structures and data type of inputs that are to be processed.
+\item[Services:] This module handles all logic of the Pong Invader's system. All processed logic and mathematical representations of the game state are then passed to GameObject. 
+\item[Implemented By:] Collision
+\end{description}
+
+
+\section{Traceability Matrix} \label{SecTM}
+\begin{table}[H]
+\centering
+\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+\toprule
+\textbf{Req.} & \textbf{Modules}\\
+\midrule
+R1 & M1\\
+R2 & M2\\
+R3 & M8\\
+R4 & M5, M6, M7\\
+R5 & M4\\
+R6 & M3\\
+\bottomrule
+\end{tabular}
+\caption{Trace Between Requirements and Modules}
+\begin{description}
+\item[R1]: Hardware is capable of I/O handling. 
+\item[R2]: Game reads input from user.
+\item[R3]: Processes and stores user input through a physics system.
+\item[R4]: Game keeps track of current display data.
+\item[R5]: Game keeps track of current game state.
+\item[R6]: Game outputs all relevant display data.
+\end{description}
+\label{TblRT}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+\toprule
+\textbf{AC} & \textbf{Modules}\\
+\midrule
+\acref{acHardware} & M1\\
+\acref{acInput} & M3\\
+\acref{acParams} & M3, M4, M5\\
+\acref{acVerify} & M4\\
+\acref{acOutput} & M4\\
+\bottomrule
+\bottomrule
+\end{tabular}
+\caption{Trace Between Anticipated Changes and Modules}
+\label{TblACT}
+\end{table}
+
+\section{Use Hierarchy Between Modules} \label{SecUse}
+\begin{figure}[H]
+The hierarchy between modules that have been decomposed and mentioned throughout this document is as follows:
+\begin{enumerate}
+\item Hardware Modules (Keyboard)  
+\item  Input (KeyInput) 
+\item Controller (Collision) 
+\item Alien / Bullet / Player 
+\item GameObject 
+\item Output 
+\item Hardware Modules (Display)
+\end{enumerate}
+\color{red}
+The uses hierarchy listed above is read as such: where 1.. 7 are numbered states in a directed acyclic graph and all numbered states are followed by the prior numbered state. Hence 1 to 2 to 3...(where "to" implies the next state) and so forth. 
+\color{black}
+%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\caption{Use hierarchy among modules}
+\label{FigUH}
+\end{figure}
+%\section*{References}
+\bibliographystyle {plainnat}
+\bibliography {MG}
+\end{document}

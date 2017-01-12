@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tables</title>
+</head>
+<body>
+   SpriteStore
+   <br>
+   <table><tr><td> 
+    <table summary="">
+     <tr>
+        <td>Routine name|</td><td>In</td><td>|Out|</td><td>Exceptions</td>
+        <tr>
+        <td>get</td><td></td>SpriteStore<td>-</td><td>-</td>
+        </tr>
+        <tr>
+        <td>getSprite</td><td>String</td><td>Sprite</td><td>sprite is .gif,sprite is in folder</td>
+        </tr>
+        <tr>
+        <td>fail</td><td>String</td><td></td><td>-</td>
+        </tr>
+
+     </tr>
+   </table>
+   <br>
+   Assumptions: No Assumptions <br><br>
+   
+   State Variables: 
+   <br>
+   single: SpriteStore<br>
+   creates call to SpriteStore class<br>
+   sprites: HashMap<br>
+   The cached sprite map, from reference to sprite instance<br>
+   URL:net<br>
+   link to the image from 'res' folder<br>
+   sourceImage:BufferedImage<br>
+   describes an Image with an accessible buffer of image data<br>
+   <br>
+   
+   
+   Environment  Variables: <br>
+   Screen: Display Device<br><br>
+   
+   Access Routine Semantics:<br><br>
+   get():<br>
+   transition:Get the single instance of this class<br>
+   getSprite():<br>
+   transition:retrieves a sprite from the 'res' folder to be loaded and used in game<br>
+   fail():<br>
+   transition: exits window and prints error message to console<br>
+   
+</html>
