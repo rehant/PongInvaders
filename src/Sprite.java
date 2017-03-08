@@ -53,20 +53,38 @@ import java.awt.Image;
  * 
  */
 public class Sprite {
-	private Image image;
-	
+	private Image image; // Image object for sprite
+
+	/**
+	 * Constructor. Creates a Sprite object by storing a reference to the sprite image.
+	 * @param image A reference to the sprite image.
+	 */
 	public Sprite(Image image) {
 		this.image = image;
 	}
-	
+
+	/**
+	 * Fetch sprite width.
+	 * @return The sprite's width in pixels.
+	 */
 	public int getWidth() {
 		return image.getWidth(null);
 	}
 
+	/**
+	 * Fetches sprite height.
+	 * @return The sprite's height in pixels.
+	 */
 	public int getHeight() {
 		return image.getHeight(null);
 	}
-	
+
+	/**
+	 * Draws the sprite on the screen.
+	 * @param g The graphics context on which to draw.
+	 * @param x X co-ordinate to start drawing top-left corner at.
+	 * @param y Y co-ordinate to start drawing top-left corner at.
+	 */
 	public void draw(Graphics g,int x,int y) {
 		g.drawImage(image,x,y,null);
 	}

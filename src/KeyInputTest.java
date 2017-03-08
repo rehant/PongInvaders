@@ -4,6 +4,9 @@ import java.awt.event.KeyEvent;
 
 import org.junit.Test;
 
+/**
+ * Tests the key input handler.
+ */
 public class KeyInputTest {
 	//checks if key not presses
 	@Test

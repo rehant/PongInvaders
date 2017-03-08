@@ -104,23 +104,22 @@ import java.awt.image.BufferStrategy;
  * transition: sets bound for a variable to not go below a minimum value or maximum value
  * 
  * 
- */	
-
-
-
+ */
 public class Game extends Canvas implements Runnable  {
-
 	private static final long serialVersionUID = -1930825029999864569L;
 
 	public static final int WIDTH = 1280, HEIGHT = WIDTH / 16*9;
+	private Thread thread; // The main game thread
+	private boolean running = false; // Controls game loop
 
-	private Thread thread;
-	private boolean running = false;
-
+	/*
+	* Meta-game components.
+	 */
 	private Handler handler;
 	private HUD hud;
 	private Menu menu;
 
+	// Possible game states
 	public enum STATE {
 		Menu,
 		Game,
@@ -130,10 +129,13 @@ public class Game extends Canvas implements Runnable  {
 
 	};
 
-	public STATE gameState = STATE.Menu;
+	public STATE gameState = STATE.Menu; // Current game state. Starts with menu.
 
-
+	/**
+	 * Constructor. Creates the game.
+	 */
 	public Game(){
+		/* Create necessary objects and add them to the window. */
 		handler = new Handler();
 		menu = new Menu(this, handler);
 		this.addKeyListener(new KeyInput(handler));
@@ -144,8 +146,9 @@ public class Game extends Canvas implements Runnable  {
 
 	}
 
-
-
+	/**
+	 * Initialisation. Starts thread and game loop.
+	 */
 	public synchronized void start(){
 
 		thread = new Thread(this);
@@ -153,6 +156,9 @@ public class Game extends Canvas implements Runnable  {
 		running = true;
 	}
 
+	/**
+	 * Handles thread cleanup and ending the game loop.
+	 */
 	public synchronized void stop(){
 		try{
 			thread.join();
@@ -164,15 +170,24 @@ public class Game extends Canvas implements Runnable  {
 		}
 	}
 
+	/**
+	 * Runs the game. Takes time differences between frames into account to ensure smooth graphics.
+	 */
 	public void run(){
-		this.requestFocus();
+		this.requestFocus(); // Ensure window focus stays no game
+
+		/* Variables used to calculate time elapsed between frames */
 		long lastTime = System.nanoTime();
 		double amountofTicks = 60.0;
 		double ns = 1000000000 / amountofTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames =0;
-		while(running){
+
+		while(running){ // Game loop - handles input, updating game model, and rendering.
+
+			/* Advance game model by fixed time units as many times as necessary to take into account all elapsed time since last
+			frame update */
 			long now = System.nanoTime();
 			delta += (now - lastTime)/ ns;
 			lastTime = now;
@@ -180,11 +195,15 @@ public class Game extends Canvas implements Runnable  {
 				tick();
 				delta--;
 			}
+
+			/* Render the game objects if the game is running */
 			if(running)
 				render();
 			frames++;
 
-
+			/*
+				Calculate and display FPS every second.
+			 */
 			if(System.currentTimeMillis() - timer> 1000){
 				timer+= 1000;
 				System.out.println ("FPS: " +frames);
@@ -195,10 +214,16 @@ public class Game extends Canvas implements Runnable  {
 
 	}
 
+	/**
+	 * Handles a single "tick" - a single time step in the game world.
+	 */
 	private void tick(){
-		handler.tick();
-		if(gameState == STATE.Game){
-			hud.tick();
+		handler.tick(); // Update all game objects
+
+		if(gameState == STATE.Game){ // Only need to update objects if game is running
+			hud.tick(); // Update display
+
+			/* Handle player death by enemy or player victory by killing all aliens */
 			if(gameState == Game.STATE.Game){
 				if(HUD.HEALTH != 100 || Ball.PlayerDefeat == true){
 					handler.clearEnemy();
@@ -218,41 +243,58 @@ public class Game extends Canvas implements Runnable  {
 			}
 	}
 
+	/**
+	 * Renders objects to the screen using buffers.
+	 */
 	private void render(){
+		/* Set up buffers to be swapped. */
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null){
 			this.createBufferStrategy(3);
 			return;
 		}
 
-		Graphics g  = bs.getDrawGraphics();
+		Graphics g  = bs.getDrawGraphics(); // Fetch graphics object to draw ob
 
+		/* Set up graphics object for drawing by clearing to black */
 		g.setColor(Color.black);
 		g.fillRect(0,0,WIDTH,HEIGHT);
 
+		handler.render(g); // Render all game objects using the handler
 
-		handler.render(g);
+		// Render the menu if the game isn't in progress
 		if(gameState == STATE.Menu || gameState == STATE.Instructions || gameState == STATE.GAMEOVER || gameState == STATE.WIN){
 			menu.render(g);
 		}
 
-
+		/* Release graphics object and show most recently-drawn data */
 		g.dispose();
 		bs.show();
 	}
-	
+
+	/**
+	 * Clamps a value to a range.
+	 * @param var The value to clamp.
+	 * @param min The minimum value to clamp this value to.
+	 * @param max The maximum value to clamp this value to.
+	 * @return Max if the value was >= to it, min if the value was <= to it, or the value otherwise.
+	 */
 	public static int Clamp(int var, int min, int max){
-		if(var >= max){
+		if(var >= max){ // Value above max, clamp it to max
 			return var = max;
 		}
-		else if(var <= min){
+		else if(var <= min){ // Value below min, clamp it to min
 			return var = min;
 		}
 
 		else
-			return var;
+			return var; // Value in range, return it
 	}
 
+	/**
+	 * Main method of Java program. Starts the system.
+	 * @param args Command-line arguments (unused).
+	 */
 	public static void main (String args[]){
 		new Game();
 	}

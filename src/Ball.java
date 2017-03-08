@@ -91,30 +91,44 @@ import java.awt.*;
  * transition: Will render object to screen <br>
  * getBounds():<br>
  * transition: Gets bounds of the ball to set up for collision <br>
- */	
-
-
-
+ */
 public class Ball extends GameObject {
 
-	Handler handler;
+	Handler handler; // Handler for this object
 
+	/**
+	 * State booleans used to determine who was defeated.
+	 */
 	public static boolean AIDefeat = false;
 	public static boolean PlayerDefeat = false;
 
+	/**
+	 * Constructor. Creates a Ball object.
+	 * @param ref String containing path to image file.
+	 * @param x Initial x position.
+	 * @param y Initial y position.
+	 * @param id Object ID.
+	 * @param handler Handler object which controls all game objects.
+	 */
 	public Ball(String ref,float x, float y, ID id, Handler handler) {
+		/* Store variables, using parent's constructor when possible */
 		super(ref,x, y, id);
 		this.handler = handler;
 		setY(Game.HEIGHT-100);
 		velX = -4;
 		velY =2;
-		Game.Clamp((int)velY, -10, 10);
+		Game.Clamp((int)velY, -10, 10); // Ensure that y velocity stays in range [-10, 10]
 	}
 
+	/**
+	 * Handles a frame update.
+	 */
 	public void tick() {
+		/* Change position taking velocity into account */
 		x += velX;
 		y -= velY; // Negative velY because the top of the screen is 0
-		if(y < 0||y > Game.HEIGHT -75){
+
+		if(y < 0||y > Game.HEIGHT -75){ // Reverse ball direction if it goes above or below the FOV
 			velY = -velY;
 		}
 
@@ -130,14 +144,21 @@ public class Ball extends GameObject {
 			AIDefeat = true;
 		}
 
-		collision();
+		collision(); // Handle collisions
 	}
 
+	/**
+	 * Draw ball on screen, using graphics object.
+	 * @param g The graphics object.
+	 */
 	public void render(Graphics g) {
 		g.setColor(Color.cyan);
 		g.fillRect((int)x, (int)y, 15, 15);
 	}
 
+	/**
+	 * Handle a collision.
+	 */
 	private void collision() {
 		for(int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
@@ -171,6 +192,7 @@ public class Ball extends GameObject {
 				
 
 			}
+			// Collision with another AI. Reverse our direction on the x axis and move in opposite direction
 			if(tempObject.getId() == ID.AI) {
 
 				if(x > Game.WIDTH-19){
@@ -184,6 +206,10 @@ public class Ball extends GameObject {
 		}
 	}
 
+	/**
+	 * Fetch rectangle describing collision bounds for this Ball.
+	 * @return A Rectangle object describing the area on the screen which this Ball occupies.
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 15, 15);
 	}

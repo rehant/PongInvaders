@@ -112,59 +112,120 @@ import java.awt.Rectangle;
  */	
 public abstract class GameObject {
 
+	/* Internal data */
 	protected  float x, y;
 	protected ID id;
-	protected float velX, velY;
+	protected float velX, velY; // Velocities on X and Y axes
 	protected Sprite sprite;
+
+	/**
+	 * Constructor. Creates a GameObject.
+	 * @param ref String containing path to sprite file.
+	 * @param x Initial x position.
+	 * @param y Initial y position.
+	 * @param id This object's ID.
+	 */
 	public GameObject(String ref,float x, float y, ID id){
 		this.sprite = SpriteStore.get().getSprite(ref);
 		this.x = x;
 		this.y = y;
 		this.id = id;
 	}
-	
+
+	/**
+	 * Handles a single frame update.
+	 */
 	public abstract void tick();
+
+	/**
+	 * Renders a game object to the screen.
+	 * @param g The garphics interface on which to draw.
+	 */
 	public abstract void render (Graphics g);
+
+	/**
+	 * Fetches this object's on-screen bounds for collision detection.
+	 * @return A Rectangle object describing the area occuppied by this object on screen and its position.
+	 */
 	public abstract Rectangle getBounds();
-	
-	
-	
+
+	/**
+	 * Changes this object's x value.
+	 * @param x The new x value.
+	 */
 	public void setX(int x){
 		this.x = x;
 	}
-	
+
+	/**
+	 * Changes this object's y value.
+	 * @param y The new y value.
+	 */
 	public void setY(int y){
 		this.y = y;
 	}
-	
+
+	/**
+	 * Fetches this object's x co-ordinate.
+	 * @return This object's x co-ordinate.
+	 */
 	public float getX(){
 		return x;
 	}
-	
+
+	/**
+	 * Fetches this object's y co-ordinate.
+	 * @return This object's y co-ordinate.
+	 */
 	public float getY(){
 		return y;
 	}
-	
+
+	/**
+	 * Changes this object's ID.
+	 * @param id The new ID.
+	 */
 	public void setId(ID id){
 		this.id = id;
 	}
-	
+
+	/**
+	 * Fetches this object's ID.
+	 * @return
+	 */
 	public ID getId(){
 		return id;
 	}
-	
+
+	/**
+	 * Changes this object's x velocity.
+	 * @param velX The new x velocity value.
+	 */
 	public void setVelX(int velX){
 		this.velX=velX;
 	}
-	
+
+	/**
+	 * Changes this object's y velocity.
+	 * @param velY The new y velocity value.
+	 */
 	public void setVelY(int velY){
 		this.velY= velY;
 	}
+
+	/**
+	 * Fetches this object's velocity in the x direction.
+	 * @return The x velocity of this object.
+	 */
 	public float getVelX(){
 		return velX;
 	}
+
+	/**
+	 * Fetches this object's velocity in the y direction.
+	 * @return The y velocity of this object.
+	 */
 	public float getVelY(){
 		return velY;
 	}
-
 }

@@ -33,8 +33,11 @@ public class HUD {
 	 * 
 	 */
 	
-	public static int HEALTH = 100;
-	
+	public static int HEALTH = 100; // Health value to display
+
+	/**
+	 * Handles a frame update by ensuring that the health stays within the 0-100 range.
+	 */
 	public void tick(){
 		
 		HEALTH = Game.Clamp(HEALTH, 0, 100);

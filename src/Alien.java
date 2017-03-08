@@ -1,4 +1,5 @@
-import java.awt.*;
+import java.awt.*; // Graphics classes
+
 /**
  * Child of GameObject
  * <br>
@@ -87,18 +88,35 @@ import java.awt.*;
  */	
 public class Alien extends GameObject {
 
-	Handler handler;
-	private int alienDrop = -29;
+	Handler handler; // Object which controls all game objects
+	private int alienDrop = -29; // Amount to drop the other alien by in the event of a collision with one
 
+	/**
+	 * Constructor which creates an Alien object.
+	 * @param ref String containing path to sprite file.
+	 * @param x Alien's initial x position.
+	 * @param y Alien's initial y position.
+	 * @param id ID for game handler.
+	 * @param handler The game handler which will handle this alien.
+	 */
 	public Alien(String ref, float x, float y, ID id, Handler handler) {
-		
+
+		/**
+		 * Save variables, re-using parent's code in doing so.
+		 */
 		super(ref,x, y, id);
 		this.handler = handler;
 		velX = 5;
 	}
-	
 
+
+	/**
+	 * Handle a frame update
+	 */
 	public void tick() {
+		/**
+		 * Update positions according to our velocities.
+		 */
 		x += velX;
 		y += velY;
 
@@ -118,7 +136,13 @@ public class Alien extends GameObject {
 		}
 	}
 
+	/**
+	 * Handles a collision with the right side of the sprite.
+	 */
 	private void collisionR() {
+		/**
+		 * Check if this object collided with an alien. If so, reverse it's direction on the X axis and drop it down the screen.
+		 */
 			for(int i = 0; i < handler.object.size(); i++) {
 				GameObject tempObject = handler.object.get(i);
 				if(tempObject.getId() == ID.Alien) {
@@ -127,8 +151,14 @@ public class Alien extends GameObject {
 				}
 			}
 		}
-	
+
+	/**
+	 * Handles a collision with the left side of the sprite.
+	 */
 	private void collisionL() {
+		/**
+		 * Check if this object collided with an alien. If so, reverse it's direction on the X axis and drop it down the screen.
+		 */
 		for(int i = handler.object.size()-1; i > 0; --i) {
 			GameObject tempObject = handler.object.get(i);
 			if(tempObject.getId() == ID.Alien) {
@@ -141,10 +171,18 @@ public class Alien extends GameObject {
 		tempObject.x += 10;
 	}
 
+	/**
+	 * Renders the alien sprite on the Java Graphics object.
+	 * @param g The Java Graphics object to draw on.
+	 */
 	public void render(Graphics g) {
 		sprite.draw(g,(int) x,(int) y);
 	}
 
+	/**
+	 * Fetches this object's collision bounds.
+	 * @return A rectangle representing the 2D area on the screen which this alien object occupies.
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int)x + 4,(int)y ,34, 28);
 	}

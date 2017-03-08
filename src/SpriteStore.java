@@ -57,18 +57,25 @@ import javax.imageio.ImageIO;
  * 
  */
 
+/**
+ * Object which stores and fetches sprites.
+ */
 public class SpriteStore {
 
-	private static SpriteStore single = new SpriteStore();
+	private static SpriteStore single = new SpriteStore(); // A reference to a sprite store
 	
 	public static SpriteStore get() {
 		return single;
-	}
+	} // Fetches the sprite store
 	
 	
-	private HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
-	
+	private HashMap<String, Sprite> sprites = new HashMap<String, Sprite>(); // Used to associate a Sprite object with its name
 
+	/**
+	 * Fetches a sprite from the store, or loads it into the store if it isn't already there.
+	 * @param ref Path/name of sprite to load.
+	 * @return A Sprite object with data for the requested sprite image.
+	 */
 	public Sprite getSprite(String ref) {
 		// if we've already got the sprite in the cache
 		// then just return the existing version
@@ -110,8 +117,11 @@ public class SpriteStore {
 		
 		return sprite;
 	}
-	
 
+	/**
+	 * Handles a resource-loading failure by exiting.
+	 * @param message The message to display when exiting.
+	 */
 	private void fail(String message) {
 		// we're pretty dramatic here, if a resource isn't available
 		// we dump the message and exit the game

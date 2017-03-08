@@ -5,6 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+/**
+ * Main window class. Sets up the game window and starts the game.
+ */
 public class Window extends Canvas{
 
 
@@ -47,6 +50,15 @@ public class Window extends Canvas{
  * 
  * 
  */
+
+	/**
+	 * Constructor. Creates a new window with the specified width, height, and title. Also adds the game canvas to the window and
+	 * starts the game.
+	 * @param width Desired game width.
+	 * @param height Desired game height.
+	 * @param title Window title to display.
+	 * @param game Game frame to display in the window.
+	 */
 	public Window (int width, int height, String title, Game game){
 		JFrame frame = new JFrame(title);
 		
@@ -61,6 +73,7 @@ public class Window extends Canvas{
 		//draws window in middle of screen
 		frame.setLocationRelativeTo(null);
 		//adds game class in to frame
+
 		frame.add(game);
 		//frame can be seen
 		frame.setVisible(true);

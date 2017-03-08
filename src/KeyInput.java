@@ -73,17 +73,24 @@ public class KeyInput extends KeyAdapter{
 	private long lastShot = 0;
 	private static int displacement = 8;
 
+	/**
+	 * Prevents user from shooting faster than the predefined bullet lag.
+	 */
 	private void try2Shoot() {
 		long wait = 500;
 		if (System.currentTimeMillis() - lastShot < wait) {
 			// Do nothing if wait is not satisfied
 		}
-		else {
+		else { // Lag has passed, fire the bullet
 			lastShot = System.currentTimeMillis();
 			handler.addObject(new Bullet("sprites/bullet.gif",dx+8,Game.HEIGHT-75,ID.Bullet, handler));
 		}
 	}
-	
+
+	/**
+	 * Constructor. Saves a reference to the object handler and initialises the key state array.
+	 * @param handler Object which references all game objects.
+	 */
 	public KeyInput(Handler handler) {
 		this.handler = handler;
 		keyDown[0] = false;
@@ -92,11 +99,16 @@ public class KeyInput extends KeyAdapter{
 		keyDown[3] = false;
 		keyDown[4] = false;
 	}
-	
+
+	/**
+	 * Handles a held key press.
+	 * @param e The key event object containing event parameters.
+	 */
 	public void keyPressed(KeyEvent e) {
 		int key =e.getKeyCode();
-		if (key == KeyEvent.VK_ESCAPE) System.exit(1);
+		if (key == KeyEvent.VK_ESCAPE) System.exit(1); // Exit on ESC press
 
+		/* Check every object to see if it is the player or a paddle, and handle them separately */
 		for (int i = 0; i<handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 			dx = tempObject.x;
@@ -116,10 +128,15 @@ public class KeyInput extends KeyAdapter{
 			}
 		}
 	}
-	
+
+	/**
+	 * Handle a key being released.
+	 * @param e The event object.
+	 */
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
-		
+
+		/* Go through every object to check if it is the player or a paddle, and handle it if it is */
 		for (int i = 0; i<handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 

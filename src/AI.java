@@ -1,7 +1,9 @@
+/* Graphics classes */
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+
 /**
  *Child of GameObject
  * <br>
@@ -77,32 +79,63 @@ import java.awt.Rectangle;
  */
 public class AI extends GameObject {
 
+	/**
+	 * References to game handler and pong ball.
+	 */
 	Handler handler;
 	Ball ball;
-	
+
+	/**
+	 * Constructor. Creates a new AI opponent object.
+	 * @param ref A reference to the file where the AI sprite is located.
+	 * @param x Starting x position.
+	 * @param y Starting y position.
+	 * @param id Object ID for game controller.
+	 * @param handler A reference to the main handler for the game.
+	 */
 	public AI(String ref, float x, float y, ID id, Handler handler) {
+		/* Store variables, re-using parent code where possible */
 		super(ref, x, y, id);
 		this.handler = handler;
 		velY=3;
 	}
 
+	/**
+	 * Handles a frame update.
+	 */
 	public void tick() {
+		/**
+		 * Fetch a reference to the AI's paddle and calculate the y co-ordinate of its center.
+		 */
 		GameObject tempObject = handler.object.get(3);
 		float paddle2Ycenter = y + 45;
+
+		/**
+		 * Change our position depending on whether we are too far above or below the ball.
+		 */
 		if(paddle2Ycenter < tempObject.y ){
 			y+=velY;
 		}
 		else if(paddle2Ycenter > tempObject.y){
 			y-=velY;
 		}
-		y = Game.Clamp((int)y, 0, Game.HEIGHT-169);	
+		y = Game.Clamp((int)y, 0, Game.HEIGHT-169); // Ensure that our y position remains within acceptable bounds
 	}
+
+	/**
+	 * Render the AI object.
+	 * @param g The graphics object on which to draw the AI sprite.
+	 */
 	public void render(Graphics g) {
 		g.setColor(Color.blue);
 		g.fillRect((int)x, (int)y, 12, 90);
 		
 	}
 
+	/**
+	 * Fetches bounds for collision checking.
+	 * @return A Rectangle object representing the 2D area occupied by the AI sprite on screen.
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int)x-1, (int)y +7 , 12,74 );
 	}

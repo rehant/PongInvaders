@@ -87,19 +87,33 @@ import java.awt.Rectangle;
  */	
 public class Player extends GameObject {
 
-	Handler handler;
-	
+	Handler handler; // Object handler
+
+	/**
+	 * Construct a player object.
+	 * @param ref String containing path to player sprite image.
+	 * @param x Initial x position.
+	 * @param y Initial y position.
+	 * @param id Game object ID.
+	 * @param handler Game object handler.
+	 */
 	public Player(String ref,float x, float y, ID id, Handler handler) {
 		super(ref,x, y, id);
 		this.handler = handler;
 	}
 
+	/**
+	 * Handles a single frame update by moving the player forward while keeping it within the screen. Handles collision detection as well.
+	 */
 	public void tick() {
 		x += velX;
 		x = Game.Clamp((int)x, 3, Game.WIDTH-39);
 		collision();
 	}
-	
+
+	/**
+	 * Checks for collision with any other object. If the player hits an alien, they lose health.
+	 */
 	private void collision(){
 		for(int i= 0; i<handler.object.size(); i++){
 			GameObject tempObject = handler.object.get(i);
@@ -115,10 +129,18 @@ public class Player extends GameObject {
 		}
 	}
 
+	/**
+	 * Draws the player sprite on the screen.
+	 * @param g The graphics interface on which to draw.
+	 */
 	public void render(Graphics g) {
 		sprite.draw(g,(int) x,(int) y);
 	}
 
+	/**
+	 * Fetches a Rectangle object describing the player's collision bounds.
+	 * @return A Rectangle object describing the area which the player occupies on the screen.
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle(0, Game.HEIGHT-75 ,Game.WIDTH, 32);
 }

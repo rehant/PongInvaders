@@ -76,8 +76,11 @@ import java.util.LinkedList;
  */
 public class Handler {
 
-	public LinkedList<GameObject> object = new LinkedList<GameObject>();
+	public LinkedList<GameObject> object = new LinkedList<GameObject>(); // List of game objects in the game
 
+	/**
+	 * Handles a single frame update by having each object handle it.
+	 */
 	public void tick(){
 		for (int i = 0; i< object.size(); i++){
 			GameObject tempObject = object.get(i);
@@ -85,6 +88,10 @@ public class Handler {
 		}
 	}
 
+	/**
+	 * Draws the objects on the graphics object.
+	 * @param g The graphics object on which to draw.
+	 */
 	public void render (Graphics g){
 		for(int i = 0; i < object.size(); i++){
 			GameObject tempObject = object.get(i);
@@ -93,6 +100,9 @@ public class Handler {
 		}
 	}
 
+	/**
+	 * Destroys the player when it comes into contact with an enemy.
+	 */
 	public void clearEnemy() {
 		for (int i =0; i<object.size(); i++){
 			GameObject tempObject = object.get(i);
@@ -103,11 +113,19 @@ public class Handler {
 		}
 	}
 
+	/**
+	 * Adds an object to the list of objects in the game.
+	 * @param object The game object to add.
+	 */
 	public void addObject(GameObject object){
 		this.object.add(object);
 
 	}
 
+	/**
+	 * Removes a game object from the list of objects in the game.
+	 * @param object The game object to remove.
+	 */
 	public void removeObject(GameObject object){
 		this.object.remove(object);
 	}
