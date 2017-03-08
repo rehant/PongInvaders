@@ -84,30 +84,47 @@ import java.awt.*;
  */	
 public class Bullet extends GameObject {
 
-	Handler handler;
+	Handler handler; // Game object controller for this bullet object
+	public static int alienKillCount = 0; // Number of aliens killed by this bullet
 
-	public static int alienKillCount = 0;
-	
+	/**
+	 * Constructor. Creates a bullet object.
+	 * @param ref String containing path to bullet image file.
+	 * @param x The bullet's initial x position.
+	 * @param y The bullet's initial y position.
+	 * @param id The bullet's ID.
+	 * @param handler Reference to handler object.
+	 */
 	public Bullet(String ref,float x, float y, ID id, Handler handler) {
-		super(ref,x, y, id);
-		this.handler = handler;
+		super(ref,x, y, id); // Re-use superclass's code to store references
+		this.handler = handler; // Store reference to handler.
 	}
 
+	/**
+	 * Handles a frame update.
+	 */
 	public void tick() {
 		//x += velX;
-		y += -5;
-		if(y <= 20) {
+		y += -5; // Move down screen
+		if(y <= 20) { // Destroy bullet if it drops too far
 			handler.removeObject(this);
 		}
-		collision();
+		collision(); // Handle collisions
 	}
 
+	/**
+	 * Draws the bullet on the screen.
+	 * @param g The Graphics object on which to draw.
+	 */
 	public void render(Graphics g) {
 		sprite.draw(g,(int)x,(int)y);
 	}
 
+	/**
+	 * Checks for collisions and handles them.
+	 */
 	private void collision() {
-		for(int i= 0; i<handler.object.size(); i++) {
+		for(int i= 0; i<handler.object.size(); i++) { // Check every object
 
 			// If tempObject is of ID.Alien, and if the alien intersects the bullet, it is deleted
 			GameObject tempObject = handler.object.get(i);
@@ -123,6 +140,10 @@ public class Bullet extends GameObject {
 		}
 	}
 
+	/**
+	 * Fetches bounds for collision check.
+	 * @return Collision check bounds.
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int) x +1, (int) y ,10, 17);
 	}

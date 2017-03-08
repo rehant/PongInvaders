@@ -71,23 +71,42 @@ import java.awt.Rectangle;
  */	
 public class Pong extends GameObject {
 
-	Handler handler;
+	Handler handler; // Reference to object which handles all game objects.
 
+	/**
+	 * Creates a Pong paddle object.
+	 * @param ref String containing filesystem path to paddle sprite.
+	 * @param x Initial x co-ordinate.
+	 * @param y Initial y co-ordinate.
+	 * @param id Object ID.
+	 * @param handler Reference to master game object handler.
+	 */
 	public Pong(String ref,float x, float y, ID id, Handler handler) {
-		super(ref,x, y, id);
-		this.handler = handler;
+		super(ref,x, y, id); // Construct the game object
+		this.handler = handler; // Save a reference to our handler
 	}
 
+	/**
+	 * Handles a single frame update by dropping the paddle down, ensuring that it doesn't go below the viewport.
+	 */
 	public void tick() {
 		y -= velY; // Negative velY because the top of the screen is 0
 		y = Game.Clamp((int)y, 0, Game.HEIGHT-169);
 	}
 
+	/**
+	 * Draws the paddle on the screen.
+	 * @param g The graphics interface on which to draw.
+	 */
 	public void render(Graphics g) {		
 		g.setColor(Color.blue);
 		g.fillRect((int)x, (int)y, 12, 90);
 	}
 
+	/**
+	 * Calculates and fetches paddle bounds for collision detection.
+	 * @return A Rectangle object describing the area occupied on screen by the paddle.
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y+7 , 12,74 );
 	}

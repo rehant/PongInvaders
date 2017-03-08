@@ -115,29 +115,50 @@ import java.awt.event.MouseEvent;
  * transition: creates the title displayed on menu option box<br>
  * render():<br>
  * transition: renders menu <br>
- */	
+ */
 
+/**
+ * Menu event handler
+ * .
+ */
 public class Menu extends MouseAdapter{
 
+	/**
+	 * Used to handle state and game objects.
+	 */
 	private Game game; 
 	private Handler handler;
+
+	/**
+	 * Layout parameters.
+	 */
 	private int menuBoxHeight = 200;
 	private int menuBoxX = Game.WIDTH/2-(menuBoxHeight/2); 
 	private int menuBoxY = Game.HEIGHT/4; 
 	private int menuBoxWidth = 64;
 
+	/**
+	 * Constructor. Creates a Menu object for the game.
+	 * @param game The game to create a menu for.
+	 * @param handler Handler which references all game objects.
+	 */
 	public Menu(Game game, Handler handler){
 		this.game = game; 
 		this.handler = handler;
 	}
 
+	/**
+	 * Handles a mouse press on the menu.
+	 * @param e The mouse event
+	 */
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
 
-		if(game.gameState == Game.STATE.Menu){
+		if(game.gameState == Game.STATE.Menu){ // In menu
 
-			if(mouseOver(mx, my, menuBoxX, menuBoxY, menuBoxHeight, menuBoxWidth)){
+			if(mouseOver(mx, my, menuBoxX, menuBoxY, menuBoxHeight, menuBoxWidth)){ // Click on "New Game" button
+				/* Set up game by changing state and adding game objects to the scene */
 				game.gameState = Game.STATE.Game;
 				handler.addObject(new Player("sprites/ship.gif",Game.WIDTH/2-32,Game.HEIGHT-70,ID.Player, handler));
 				handler.addObject(new Pong("sprites/ship.gif",0, Game.HEIGHT/2-90, ID.Pong, handler));
@@ -177,6 +198,16 @@ public class Menu extends MouseAdapter{
 		}
 	}
 
+	/**
+	 * Determines if the mouse is over a particular rectangle, defined by the parameters
+	 * @param mx Mouse position's x co-ordinate.
+	 * @param my Mouse position's y co-ordinate.
+	 * @param x X coordinate of top-left corner of rectangle.
+	 * @param y Rectangle's top-left corner's y co-ordinate.
+	 * @param width Width of rectangle.
+	 * @param height Rectangle's height.
+	 * @return True if the coordinate (mx, my) is inside the rectangle; false otherwise.
+	 */
 	private boolean mouseOver(int mx, int my, int x, int y, int width, int height){
 		if(mx > x && mx < x + width){
 			if(my > y && my < y + height){
@@ -185,7 +216,16 @@ public class Menu extends MouseAdapter{
 		}else return false;
 	}
 
-
+	/**
+	 * Creates a menu option to be displayed to the user.
+	 * @param fntSize Font size.
+	 * @param colour Colour.
+	 * @param option The option text to display to the user.
+	 * @param posX X co-ordinate of option text.
+	 * @param posY Option text's y co-ordinate.
+	 * @param dHeight Option rectangle's height.
+	 * @param g The Graphics context object on which to draw.
+	 */
 	private void makeOption(int fntSize, Color colour, String option, int posX, int posY, int dHeight, Graphics g){
 		Font fnt = new Font("arial", 1, fntSize);
 		g.setFont(fnt);
@@ -195,6 +235,15 @@ public class Menu extends MouseAdapter{
 		g.drawString(option, posX, posY);
 	}
 
+	/**
+	 * Draws the title text on the screen.
+	 * @param fntSize Title font size.
+	 * @param colour Text colour.
+	 * @param title The string to display for the title.
+	 * @param posX X co-ordinate of top left corner of title string.
+	 * @param posY Y co-ordinate of top left corner of title string.
+	 * @param g Graphics context object on which to draw.
+	 */
 	private void makeTitle(int fntSize, Color colour, String title, int posX, int posY, Graphics g){
 		Font fnt = new Font("arial", 1, fntSize);
 		g.setFont(fnt);
@@ -203,15 +252,19 @@ public class Menu extends MouseAdapter{
 		g.drawString(title, posX, posY);
 	}
 
+	/**
+	 * Renders appropriate menu items for specific game states.
+	 * @param g The graphics context on which to draw.
+	 */
 	public void render(Graphics g){
-		if(game.gameState == Game.STATE.Menu){
+		if(game.gameState == Game.STATE.Menu){ // Draw menu
 
 			makeTitle(125, Color.white, "PONG INVADERS", Game.WIDTH/2-525, 150, g);
 			makeOption(30, Color.white, "Start", Game.WIDTH/2-35, menuBoxY+menuBoxWidth/2+12, 0, g);
 			makeOption(30, Color.white, "Instructions", Game.WIDTH/2-85, menuBoxY+menuBoxWidth/2+112, 100, g);
 			makeOption(30, Color.red, "Quit", Game.WIDTH/2-30, menuBoxY+menuBoxWidth/2+212, 200, g);
 
-		}else if(game.gameState == Game.STATE.Instructions){
+		}else if(game.gameState == Game.STATE.Instructions){ // Show instructions
 
 
 			makeTitle(50, Color.white, "Instructions", Game.WIDTH/2-140, 100, g);
@@ -225,12 +278,12 @@ public class Menu extends MouseAdapter{
 			makeOption(30, Color.white, "Back", Game.WIDTH/2-33, menuBoxY+menuBoxWidth/2+412, 400, g);
 
 		}
-		else if(game.gameState == Game.STATE.GAMEOVER){
+		else if(game.gameState == Game.STATE.GAMEOVER){ // Draw the "Game Over" screen
 
 			makeTitle(200, Color.red, "GAME OVER", Game.WIDTH/2-625, 250, g);
 			makeOption(30, Color.white, "Back", Game.WIDTH/2-33, menuBoxY+menuBoxWidth/2+212, 200, g);
 		}
-		else if(game.gameState == Game.STATE.WIN){
+		else if(game.gameState == Game.STATE.WIN){ // Draw the victory screen
 
 			makeTitle(200, Color.YELLOW, "VICTORY", Game.WIDTH/2-425, 250, g);
 			makeOption(30, Color.white, "Back", Game.WIDTH/2-33, menuBoxY+menuBoxWidth/2+212, 200, g);
